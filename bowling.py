@@ -1,4 +1,5 @@
 
+import re
 
 
 def get_result_when_not_strike(game, result, i, last):
@@ -13,9 +14,6 @@ def get_result_when_not_strike(game, result, i, last):
     else:
         result += get_value(game[i])
         return result
-
-
-
 
 
 def get_result_when_strike(game, result, frame, i):
@@ -72,16 +70,11 @@ def get_value(char):
     calulates the value of the actual score item, if score item is invalid,
     raises error
     '''
-    if char in "123456789":
+    if re.search("[123456789]", char):
         return int(char)
-    elif char == 'X' or char == 'x' or char == '/':
+    elif re.search("[Xx/]", char):
         return 10
     elif char == '-':
         return 0
     else:
         raise ValueError()
-
-
-def main():
-    print(score("5/11------------3/11"))
-main()
