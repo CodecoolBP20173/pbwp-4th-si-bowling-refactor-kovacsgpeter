@@ -24,17 +24,15 @@ def get_result_when_strike(game, result, frame, i):
     calculates the score including strike bonuses and so
     '''
     if frame < 10 and get_value(game[i]) == 10:
-        if game[i] == '/':
-            result += get_value(game[i+1])
-            return result
-        elif game[i] == 'X' or game[i] == 'x':
-            result += get_value(game[i+1])
+        result += get_value(game[i+1])
+        if game[i] == 'X' or game[i] == 'x':
             if game[i+2] == '/':
                 result += 10 - get_value(game[i+1])
                 return result
             else:
                 result += get_value(game[i+2])
                 return result
+        return result
     else:
         return result
 
@@ -74,13 +72,9 @@ def get_value(char):
     calulates the value of the actual score item, if score item is invalid,
     raises error
     '''
-    if char == '1' or char == '2' or char == '3' or \
-       char == '4' or char == '5' or char == '6' or \
-       char == '7' or char == '8' or char == '9':
+    if char in "123456789":
         return int(char)
-    elif char == 'X' or char == 'x':
-        return 10
-    elif char == '/':
+    elif char == 'X' or char == 'x' or char == '/':
         return 10
     elif char == '-':
         return 0
